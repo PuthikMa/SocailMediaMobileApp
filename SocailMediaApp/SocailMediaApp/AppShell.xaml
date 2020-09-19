@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SocailMediaApp.AppShell"
+             xmlns:local="clr-namespace:SocailMediaApp.Views"
+       
+        >
+
+    <FlyoutItem FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Title="Logins" Icon="tab_users" Route="Login" ContentTemplate="{DataTemplate local:LoginPage}"/>
+        <ShellContent Title="ContentsPage" Icon="tab_users" Route="Contents" ContentTemplate="{DataTemplate local:ContentsPage}"/>
+    </FlyoutItem>
+
+    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="MenuItem_Clicked">
+    </MenuItem>
+
+    <ShellContent Route="LoginPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginPage}" />
+</Shell>
