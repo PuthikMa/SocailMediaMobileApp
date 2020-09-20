@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SocailMediaApp.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Login Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="Login" Clicked="Button_Clicked"/>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="10">
+            <Entry Text="{Binding User.Username,Mode=TwoWay}" Placeholder="Username"/>
+            <Entry Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" />
+            <Button Text="Login" Command="{Binding LoginCommand}" />
+            <Label Text="Register" TextColor="Blue" HorizontalOptions="End" Padding="20">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Register}" />
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

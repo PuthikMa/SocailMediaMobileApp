@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SocailMediaApp.Views.ViewPostsPage"
+             xmlns:ImageCir="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             >
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" 
+                 Command="{Binding RefreshCommand}">
+        <ScrollView HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" Padding="0, 10,0,10">
+            <StackLayout BindableLayout.ItemsSource="{Binding Posts}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Style="{StaticResource ContainPost}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Padding="20,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ImageCir:CircleImage Grid.Column="0" 
+                                                      Aspect="AspectFit"
+                                                      WidthRequest="40"
+                                                      HeightRequest="40"
+                                                      BorderThickness="2"
+                                                      BorderColor="#f6f6f6"
+                                                      Source="{Binding User.Photo.Url}" />
+
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding User.DisplayName}" />
+                                        <Label Text="21min ago" />
+                                    </StackLayout>
+                                </Grid>
+                                <StackLayout Grid.Row="1">
+                                    <Label Text="{Binding PostContent}" Margin="10,10,10,2" />
+                                    <BoxView Color="Gray" WidthRequest="10" HeightRequest=".1" Margin="0"/>
+                                </StackLayout>
+                                <StackLayout Grid.Row="2" Margin="0,0,0,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Text="Emotion" Style="{StaticResource buttonContainerPosts}"/>
+                                        <BoxView Grid.Column="1" Color="Gray" WidthRequest=".1" HeightRequest="1" Margin="0,-5,0,0"/>
+                                        <Button Grid.Column="2" Text="Comments"  Style="{StaticResource buttonContainerPosts}" />
+                                    </Grid>
+
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

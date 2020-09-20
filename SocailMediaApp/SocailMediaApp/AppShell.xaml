@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SocailMediaApp.AppShell"
              xmlns:local="clr-namespace:SocailMediaApp.Views"
-       
         >
 
     <FlyoutItem FlyoutDisplayOptions="AsSingleItem">
@@ -15,4 +14,10 @@
     </MenuItem>
 
     <ShellContent Route="LoginPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginPage}" />
+
+    <TabBar Route="DashBoard" x:Name="DashBoard">
+        <Tab Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate local:ViewPostsPage}" />
+        </Tab>
+    </TabBar>
 </Shell>

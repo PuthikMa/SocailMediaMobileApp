@@ -11,15 +11,14 @@ using Xamarin.Forms.Xaml;
 namespace SocailMediaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class ViewPostsPage : ContentPage
     {
-        LoginPageViewModel LoginPageViewModel;
-        public LoginPage()
+        ViewPostsPageViewModel ViewPostsPageViewModel;
+        public ViewPostsPage()
         {
             InitializeComponent();
-            LoginPageViewModel = new LoginPageViewModel();
-            BindingContext = LoginPageViewModel;
+            ViewPostsPageViewModel = new ViewPostsPageViewModel();
+            BindingContext = ViewPostsPageViewModel;
         }
-
     }
 }

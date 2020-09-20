@@ -1,4 +1,5 @@
-﻿using SocailMediaApp.Views;
+﻿using SocailMediaApp.Models;
+using SocailMediaApp.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,6 +8,7 @@ namespace SocailMediaApp
 {
     public partial class App : Application
     {
+        public static User user; 
         public App()
         {
             InitializeComponent();

@@ -5,7 +5,28 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            
+            <Color x:Key="WhiteColor">White</Color>
+            <Color x:Key="BlueColor">Blue</Color>
+            <Color x:Key="ThemesWhite">#d9ecf2</Color>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+            </Style>
+            <Style TargetType="ScrollView">
+                <Setter Property="BackgroundColor" Value="Gray"/>
+            </Style>
+            <Style TargetType="StackLayout" x:Key="ContainPost">
+                <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+          
+            </Style>
+            <Style TargetType="Button" x:Key="buttonContainerPosts">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="Margin" Value="0,-5,0,0" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
