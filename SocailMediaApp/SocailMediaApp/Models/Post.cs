@@ -43,7 +43,29 @@ namespace SocailMediaApp.Models
 
         public ObservableCollection<Comment> Comments { get; set; }
 
+        public async static Task<Post> CreatePost(string post)
+        {
+            var url = "Posts";
+            var createPost = new CreatePost
+            {
+                Post = post
+            };
+            var postdata = JsonConvert.SerializeObject(createPost);
+            var response = await PostMethod(url, postdata, true);
+            var error = new ErrorHandler
+            {
+                Title = "Error",
+                Body = "Unable to Post"
+            };
 
+            if (ErrorHandler.validationResponse(response, error))
+            {
+                var result = JsonConvert.DeserializeObject<Post>(response);
+                return result;
+            }
+            return null;
+
+        }
         public async static Task<ObservableCollection<Post>> GetPosts()
         {
             var url = "Posts";
@@ -56,17 +78,10 @@ namespace SocailMediaApp.Models
 
             if (ErrorHandler.validationResponse(response, error))
             {
-                try
-                {
-                    var results = JsonConvert.DeserializeObject<ObservableCollection<Post>>(response);
+                var results = JsonConvert.DeserializeObject<ObservableCollection<Post>>(response);
 
-                    return results;
-                }
-                catch (Exception ex)
-                {
-
-                    throw;
-                }
+                return results;
+      
            
             }
             return null;

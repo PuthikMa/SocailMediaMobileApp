@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SocailMediaApp.ViewModel
 {
-    public class LoginPageViewModel : BaseViewModel, ICommand
+    public class LoginPageViewModel : BaseViewModel
     {
         public Login User { get; set; }
         public LoginPageViewModel()
@@ -20,17 +20,7 @@ namespace SocailMediaApp.ViewModel
             User.username = "6825531065";
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Execute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public ICommand LoginCommand => new Command(UserLogin);
         public ICommand Register => new Command(SayHello);

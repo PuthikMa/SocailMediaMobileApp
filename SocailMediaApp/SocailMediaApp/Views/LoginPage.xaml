@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SocailMediaApp.Views.LoginPage">
+             x:Class="SocailMediaApp.Views.LoginPage"
+             xmlns:local="clr-namespace:SocailMediaApp">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="10">
-            <Entry Text="{Binding User.Username,Mode=TwoWay}" Placeholder="Username"/>
-            <Entry Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" />
+            <local:RoundedEntry Text="{Binding User.Username,Mode=TwoWay}" Placeholder="Username"></local:RoundedEntry>
+            <local:RoundedEntry Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" ></local:RoundedEntry>
+            <!--<Entry Text="{Binding User.Username,Mode=TwoWay}" Placeholder="Username"/>
+            <Entry Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" />-->
             <Button Text="Login" Command="{Binding LoginCommand}" />
             <Label Text="Register" TextColor="Blue" HorizontalOptions="End" Padding="20">
                 <Label.GestureRecognizers>
