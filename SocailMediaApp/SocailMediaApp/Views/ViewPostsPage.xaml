@@ -15,12 +15,10 @@
                 </Grid.ColumnDefinitions>
                 <ImageCir:CircleImage Grid.Column="0" 
                                       Aspect="AspectFit"
-                                      WidthRequest="80"
-                                      HeightRequest="80"
                                       BorderThickness="2"
                                       BorderColor="#f6f6f6"
+                                      HeightRequest="100"
                                       Source="{Binding ProfilePicture}" />
-                <!--<Editor Grid.Column="1" Placeholder="Enter your post" FontSize="10" Text="{Binding Content,Mode=TwoWay}"/>-->
                 <local:RoundedEntry Grid.Column="1" Placeholder="Enter your post" FontSize="10" Text="{Binding Content,Mode=TwoWay}"></local:RoundedEntry>
                 <Button Grid.Column="2" Text="Post" FontSize="10" Command="{Binding PostContent}" />
             </Grid>            
