@@ -21,9 +21,10 @@ namespace SocailMediaApp.Views
             BindingContext = ViewPostsPageViewModel;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            base.OnAppearing();
+            await App.StartConnectSignalR();
         }
+      
     }
 }

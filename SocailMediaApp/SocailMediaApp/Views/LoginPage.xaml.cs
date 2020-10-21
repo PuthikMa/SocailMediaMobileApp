@@ -20,6 +20,10 @@ namespace SocailMediaApp.Views
             LoginPageViewModel = new LoginPageViewModel();
             BindingContext = LoginPageViewModel;
         }
-
+        protected override async void OnAppearing()
+        {
+            await App.StopConnectionSignalR();
+        }
+        
     }
 }

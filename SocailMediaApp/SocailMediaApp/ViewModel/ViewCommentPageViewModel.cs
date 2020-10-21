@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SocailMediaApp.ViewModel
 {
@@ -21,16 +23,22 @@ namespace SocailMediaApp.ViewModel
             set { post = value; OnPropertyChange(); }
         }
 
-        private bool isConnectToSignalR = false;
         public ViewCommentPageViewModel(string postId)
         {
             Post = App.Posts.Where(x => x.Id == postId).FirstOrDefault();
        
         }
 
-   
-     
+        private string comment;
 
-  
+        public string Comment
+        {
+            get { return comment; }
+            set { comment = value; OnPropertyChange(); }
+        }
+
+        public ICommand PostCommentCommand => new Command(async () => Comment = await CreateComment.PostComment(Post.Id, Comment));
+
+
     }
 }

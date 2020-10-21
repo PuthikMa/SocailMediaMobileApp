@@ -45,34 +45,48 @@ namespace SocailMediaApp
         }
 
         private static HubConnection hubConnection;
-        public async Task StartConnectSignalR()
+        public static async Task StartConnectSignalR()
         {
-            if (!isConnectToSignalR)
+            try
             {
-                hubConnection = new HubConnectionBuilder().WithUrl(Constants.HubCommentUrl).Build();
-
-                hubConnection.On<string>("ReceiveComment", (message) =>
+                if (!isConnectToSignalR)
                 {
-                    var encodeMsg = $"{message}";
-                    var comment = JsonConvert.DeserializeObject<Comment>(message);
-                    //var restemp = Posts.Where(x => x.Id == comment.PostId).FirstOrDefault();
-                    Posts.Where(x => x.Id == comment.PostId).FirstOrDefault().Comments.Add(comment);
-                });
+                    hubConnection = new HubConnectionBuilder().WithUrl(Constants.HubCommentUrl).Build();
 
-                hubConnection.On<string>("PrivateMessage", (messase) =>
-                {
+                    hubConnection.On<string>("ReceiveComment", (message) =>
+                    {
+                        var encodeMsg = $"{message}";
+                        var comment = JsonConvert.DeserializeObject<Comment>(message);
+                        //var restemp = Posts.Where(x => x.Id == comment.PostId).FirstOrDefault();
+                        Posts.Where(x => x.Id == comment.PostId).FirstOrDefault().Comments.Add(comment);
+                    });
 
-                });
+                    hubConnection.On<string>("PrivateMessage", (messase) =>
+                    {
+
+                    });
 
 
-                await hubConnection.StartAsync();
+                    await hubConnection.StartAsync();
+                }
+                isConnectToSignalR = true;
             }
-            isConnectToSignalR = true;
+            catch (Exception ex)
+            {
+                isConnectToSignalR = false;
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+
+            }
+      
         }
         public async static Task StopConnectionSignalR()
         {
-            await hubConnection.StopAsync();
-            isConnectToSignalR = false;
+            if (isConnectToSignalR)
+            {
+                await hubConnection.StopAsync();
+                isConnectToSignalR = false;
+            }
+
         }
         protected override  void OnSleep()
         {
