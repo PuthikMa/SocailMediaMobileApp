@@ -1,19 +1,22 @@
 ﻿using Newtonsoft.Json;
 using SocailMediaApp.Helper;
 using SocailMediaApp.HttpRequest;
+using SocailMediaApp.ViewModel;
 using SocailMediaApp.ViewModel.BaseModel;
+using SocailMediaApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SocailMediaApp.Models
 {
     public class Post : RestService
     {
         private string id;
-
         public string Id
         {
             get { return id; }
@@ -40,9 +43,21 @@ namespace SocailMediaApp.Models
             get { return user; }
             set { user = value; OnPropertyChange(); }
         }
+        private DateTime createDate;
 
-        public ObservableCollection<Comment> Comments { get; set; }
+        public DateTime CreateDate
+        {
+            get { return createDate; }
+            set { createDate = value; OnPropertyChange(); }
+        }
 
+        private ObservableCollection<Comment> comments { get; set; }
+        public ObservableCollection<Comment> Comments
+        {
+            get { return comments; }
+            set { comments = value;OnPropertyChange();}
+        }
+ 
         public async static Task<Post> CreatePost(string post)
         {
             var url = "Posts";
@@ -85,6 +100,13 @@ namespace SocailMediaApp.Models
            
             }
             return null;
+        }
+
+        public ICommand CommentPost => new Command(NavigateToViewCommentPost);
+        private async void NavigateToViewCommentPost(object postId)
+        {
+            await Shell.Current.Navigation.PushAsync(new ViewComment(postId.ToString()));
+
         }
     }
     

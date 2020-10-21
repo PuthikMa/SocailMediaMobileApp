@@ -7,8 +7,8 @@ namespace SocailMediaApp.Models
 {
     public class Comment : BaseViewModel
     {
-        private int id;
-        public int Id
+        private string id;
+        public string Id
         {
             get { return id; }
             set { id = value; OnPropertyChange(); }

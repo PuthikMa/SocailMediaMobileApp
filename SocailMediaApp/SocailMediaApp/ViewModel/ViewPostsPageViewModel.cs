@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using SocailMediaApp.Helper;
 using SocailMediaApp.HttpRequest;
 using SocailMediaApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,11 +16,11 @@ namespace SocailMediaApp.ViewModel
 {
     public class ViewPostsPageViewModel : RestService
     {
-        public ObservableCollection<Post> posts { get; set; }
+        //public ObservableCollection<Post> posts { get; set; }
         public ObservableCollection<Post> Posts
         {
-            get { return posts; }
-            set { posts = value; OnPropertyChange(); }
+            get { return App.Posts; }
+            set { App.Posts = value; OnPropertyChange(); }
         }
         private int commentCount;
 
@@ -41,6 +44,7 @@ namespace SocailMediaApp.ViewModel
             set { content = value; OnPropertyChange(); }
         }
 
+        private bool IsConnect = false;
 
         private string profilePicture;
 
@@ -52,11 +56,20 @@ namespace SocailMediaApp.ViewModel
 
         public ICommand RefreshCommand => new Command(RefreshingLoad);
         public ICommand PostContent => new Command(CreatePost);
+        
         public ViewPostsPageViewModel()
         {
-            Posts = new ObservableCollection<Post>();
+            //Posts = new ObservableCollection<Post>();
             LoadPosts();
             ProfilePicture = App.user.ProfileImage;
+            
+        }
+
+ 
+        
+        async void up()
+        {
+            await App.Current.MainPage.DisplayAlert("hi", "", "OK");
         }
         public async void CreatePost()
         {
@@ -72,8 +85,9 @@ namespace SocailMediaApp.ViewModel
         public async void LoadPosts()
         {
            Posts =  await Post.GetPosts();
-          
+        
         }
+
 
     }
 }

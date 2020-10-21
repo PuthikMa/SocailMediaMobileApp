@@ -19,7 +19,7 @@
                                       BorderColor="#f6f6f6"
                                       HeightRequest="100"
                                       Source="{Binding ProfilePicture}" />
-                <local:RoundedEntry Grid.Column="1" Placeholder="Enter your post" FontSize="10" Text="{Binding Content,Mode=TwoWay}"></local:RoundedEntry>
+                <local:RoundEditor Grid.Column="1" Placeholder="Enter your post" FontSize="10" Text="{Binding Content,Mode=TwoWay}" AutoSize="TextChanges" ></local:RoundEditor>
                 <Button Grid.Column="2" Text="Post" FontSize="10" Command="{Binding PostContent}" />
             </Grid>            
         </StackLayout>
@@ -72,7 +72,9 @@
                                             <BoxView Grid.Column="1" Color="Gray" WidthRequest=".1" HeightRequest="1" Margin="0,-5,0,0"/>
                                             <Button Grid.Column="2" Text="Hate"  Style="{StaticResource buttonContainerPosts}" />
                                             <BoxView Grid.Column="3" Color="Gray" WidthRequest=".1" HeightRequest="1" Margin="0,-5,0,0"/>
-                                            <Button Grid.Column="4" Text="Comments"  Style="{StaticResource buttonContainerPosts}" />
+                                            <Button Grid.Column="4" Text="Comments"  Style="{StaticResource buttonContainerPosts}" 
+                                                    Command="{Binding CommentPost}" 
+                                                    CommandParameter="{Binding Id}"/>
                                         </Grid>
 
                                     </StackLayout>

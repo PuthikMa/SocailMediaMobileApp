@@ -20,5 +20,10 @@ namespace SocailMediaApp.Views
             ViewPostsPageViewModel = new ViewPostsPageViewModel();
             BindingContext = ViewPostsPageViewModel;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
     }
 }
