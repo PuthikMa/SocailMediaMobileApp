@@ -74,7 +74,7 @@ namespace SocailMediaApp.ViewModel
             try
             {
                 var result = await Post.CreatePost(Content);
-                //App.Posts.Add(result);
+                App.Posts.Insert(0,result);
             }
             catch (Exception ex)
             {
