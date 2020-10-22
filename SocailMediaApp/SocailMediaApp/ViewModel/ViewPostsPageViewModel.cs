@@ -62,7 +62,7 @@ namespace SocailMediaApp.ViewModel
             //Posts = new ObservableCollection<Post>();
             LoadPosts();
             ProfilePicture = App.user.ProfileImage;
-            StartConnectSignalR();
+            //StartConnectSignalR();
 
 
         }
@@ -94,7 +94,7 @@ namespace SocailMediaApp.ViewModel
            Posts =  await Post.GetPosts();
         
         }
-        bool isConnectToSignalR = false;
+        public bool isConnectToSignalR = false;
 
         private  HubConnection hubConnection;
         public  async void StartConnectSignalR()

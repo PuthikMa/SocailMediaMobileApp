@@ -33,11 +33,13 @@ namespace SocailMediaApp.Converters
             }else if(resutTime.Minutes > 0)
             {
                 return $"{resutTime.Minutes} minutes ago";
-            }else if (resutTime.Seconds > 0)
+            }else
             {
                 return $"{resutTime.Seconds} seconds ago";
             }
-            throw new NotImplementedException();
+
+
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

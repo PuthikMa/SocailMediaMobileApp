@@ -23,7 +23,7 @@ namespace SocailMediaApp.Views
 
         protected override async void OnAppearing()
         {
-           // await App.StartConnectSignalR();
+           await App.StartConnectSignalR();
         }
       
     }
