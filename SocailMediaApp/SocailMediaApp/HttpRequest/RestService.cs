@@ -41,24 +41,33 @@ namespace SocailMediaApp.HttpRequest
 
        public static async Task<string> PostMethod(string uri,string content="", bool isAuthRequest= false)
        {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                if (isAuthRequest)
+                using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Authorization =
-                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", $"{App.user.Token}");
-                }
-                var data = new StringContent(content, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(Constants.BaseURL + uri,data);
+                    if (isAuthRequest)
+                    {
+                        client.DefaultRequestHeaders.Authorization =
+                            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", $"{App.user.Token}");
+                    }
+                    var data = new StringContent(content, Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(Constants.BaseURL + uri, data);
 
-                string json = string.Empty;
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    json = await response.Content.ReadAsStringAsync();
-                    return json;
+                    string json = string.Empty;
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        json = await response.Content.ReadAsStringAsync();
+                        return json;
+                    }
+                    return null;
                 }
-                return null;
             }
+            catch (Exception ex)
+            {
+               await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+                throw;
+            }
+      
         }
     }
 }

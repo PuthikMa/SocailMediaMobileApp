@@ -55,26 +55,33 @@ namespace SocailMediaApp.ViewModel
         }
 
         public ICommand RefreshCommand => new Command(RefreshingLoad);
-        public ICommand PostContent => new Command(CreatePost);
+        public ICommand PostContent => new Command(async() => await CreatePost());
         
         public ViewPostsPageViewModel()
         {
             //Posts = new ObservableCollection<Post>();
             LoadPosts();
             ProfilePicture = App.user.ProfileImage;
-            
+            StartConnectSignalR();
+
+
         }
 
  
-        
-        async void up()
+
+        public async Task CreatePost()
         {
-            await App.Current.MainPage.DisplayAlert("hi", "", "OK");
-        }
-        public async void CreatePost()
-        {
-            var result = await Post.CreatePost(Content);
-            Posts.Insert(0,result);
+            try
+            {
+                var result = await Post.CreatePost(Content);
+                //App.Posts.Add(result);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+              
+            }
+   
         }
         public void RefreshingLoad()
         {
@@ -87,7 +94,43 @@ namespace SocailMediaApp.ViewModel
            Posts =  await Post.GetPosts();
         
         }
+        bool isConnectToSignalR = false;
 
+        private  HubConnection hubConnection;
+        public  async void StartConnectSignalR()
+        {
+            try
+            {
+                if (!isConnectToSignalR)
+                {
+                    hubConnection = new HubConnectionBuilder().WithUrl(Constants.HubCommentUrl).Build();
+
+                    hubConnection.On<string>("ReceiveComment", (message) =>
+                    {
+                        var encodeMsg = $"{message}";
+                        var comment = JsonConvert.DeserializeObject<Comment>(message);
+                        //var restemp = Posts.Where(x => x.Id == comment.PostId).FirstOrDefault();
+                        Posts.Where(x => x.Id == comment.PostId).FirstOrDefault().Comments.Add(comment);
+                    });
+
+                    hubConnection.On<string>("PrivateMessage", (messase) =>
+                    {
+
+                    });
+
+
+                    await hubConnection.StartAsync();
+                }
+                isConnectToSignalR = true;
+            }
+            catch (Exception ex)
+            {
+                isConnectToSignalR = false;
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+
+            }
+
+        }
 
     }
 }

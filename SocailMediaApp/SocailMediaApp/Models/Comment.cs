@@ -35,6 +35,14 @@ namespace SocailMediaApp.Models
             get { return userId; }
             set { userId = value; OnPropertyChange(); }
         }
+        private DateTime createDate;
+
+        public DateTime CreateDate
+        {
+            get { return createDate; }
+            set { createDate = value;  OnPropertyChange(); }
+        }
+
         private AppUser user;
 
         public AppUser User

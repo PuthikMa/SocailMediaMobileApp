@@ -60,25 +60,34 @@ namespace SocailMediaApp.Models
  
         public async static Task<Post> CreatePost(string post)
         {
-            var url = "Posts";
-            var createPost = new CreatePost
+            try
             {
-                Post = post
-            };
-            var postdata = JsonConvert.SerializeObject(createPost);
-            var response = await PostMethod(url, postdata, true);
-            var error = new ErrorHandler
-            {
-                Title = "Error",
-                Body = "Unable to Post"
-            };
+                var url = "Posts";
+                var createPost = new CreatePost
+                {
+                    Post = post
+                };
+                var postdata =JsonConvert.SerializeObject(createPost);
+                var response = await PostMethod(url, postdata, true);
+                var error = new ErrorHandler
+                {
+                    Title = "Error",
+                    Body = "Unable to Post"
+                };
 
-            if (ErrorHandler.validationResponse(response, error))
-            {
-                var result = JsonConvert.DeserializeObject<Post>(response);
-                return result;
+                if (ErrorHandler.validationResponse(response, error))
+                {
+                    var result = JsonConvert.DeserializeObject<Post>(response);
+                    return result;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+                throw;
+            }
+
 
         }
         public async static Task<ObservableCollection<Post>> GetPosts()

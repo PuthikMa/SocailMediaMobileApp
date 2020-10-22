@@ -27,7 +27,7 @@
                                               Source="{Binding Post.User.Photo.Url}" />
                             <StackLayout Grid.Column="1">
                                 <Label Text="{Binding Post.User.DisplayName}" />
-                                <Label Text="21min ago" />
+                                <Label Text="{Binding Post.CreateDate,Converter={StaticResource TimeConverter}}" />
                             </StackLayout>
                         </Grid>
                         <StackLayout>
@@ -68,7 +68,7 @@
                                                       />
                                         <StackLayout Grid.Column="1" HorizontalOptions="Start">
                                             <Label Text="{Binding User.DisplayName}" FontSize="Small" FontAttributes="Bold"/>
-                                            <Label Text="24 min ago" Margin="0,-10,0,0" FontSize="Micro" />
+                                            <Label Text="{Binding CreateDate,Converter= {StaticResource TimeConverter}}" Margin="0,-10,0,0" FontSize="Micro" />
                                         </StackLayout>
                                     </Grid>
                                     <Label Text="{Binding CommentContent}" Margin="58,-15,0,10" FontSize="Small"/>

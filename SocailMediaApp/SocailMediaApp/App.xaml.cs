@@ -61,10 +61,10 @@ namespace SocailMediaApp
                         Posts.Where(x => x.Id == comment.PostId).FirstOrDefault().Comments.Add(comment);
                     });
 
-                    hubConnection.On<string>("PrivateMessage", (messase) =>
-                    {
+                    //hubConnection.On<string>("PrivateMessage", (messase) =>
+                    //{
 
-                    });
+                    //});
 
 
                     await hubConnection.StartAsync();

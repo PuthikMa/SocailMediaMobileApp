@@ -14,7 +14,29 @@ namespace SocailMediaApp.Converters
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dateTime = value.ToString();
+            var dateTimeNow = DateTime.UtcNow;
+            var dateTime = (DateTime)value;
+
+            var resutTime = dateTimeNow - dateTime;
+            if(resutTime.Days> 365)
+            {
+                const int oneYear = 365;
+                int resultInYear = (int)(resutTime.TotalDays / oneYear);
+                return $"{resultInYear} years ago";
+            }
+            else if(resutTime.Days > 0)
+            {
+                return $"{resutTime.Days} days ago";
+            }else if(resutTime.Hours > 0)
+            {
+                return $"{resutTime.Hours} hours ago";
+            }else if(resutTime.Minutes > 0)
+            {
+                return $"{resutTime.Minutes} minutes ago";
+            }else if (resutTime.Seconds > 0)
+            {
+                return $"{resutTime.Seconds} seconds ago";
+            }
             throw new NotImplementedException();
         }
 
