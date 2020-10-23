@@ -33,9 +33,13 @@ namespace SocailMediaApp.Converters
             }else if(resutTime.Minutes > 0)
             {
                 return $"{resutTime.Minutes} minutes ago";
-            }else
+            }else if (resutTime.Seconds > 0)
             {
                 return $"{resutTime.Seconds} seconds ago";
+            }
+            else
+            {
+                return "just now...";
             }
 
 

@@ -62,12 +62,10 @@ namespace SocailMediaApp.ViewModel
             //Posts = new ObservableCollection<Post>();
             LoadPosts();
             ProfilePicture = App.user.ProfileImage;
-            //StartConnectSignalR();
+ 
 
 
         }
-
- 
 
         public async Task CreatePost()
         {
@@ -94,43 +92,7 @@ namespace SocailMediaApp.ViewModel
            Posts =  await Post.GetPosts();
         
         }
-        public bool isConnectToSignalR = false;
-
-        private  HubConnection hubConnection;
-        public  async void StartConnectSignalR()
-        {
-            try
-            {
-                if (!isConnectToSignalR)
-                {
-                    hubConnection = new HubConnectionBuilder().WithUrl(Constants.HubCommentUrl).Build();
-
-                    hubConnection.On<string>("ReceiveComment", (message) =>
-                    {
-                        var encodeMsg = $"{message}";
-                        var comment = JsonConvert.DeserializeObject<Comment>(message);
-                        //var restemp = Posts.Where(x => x.Id == comment.PostId).FirstOrDefault();
-                        Posts.Where(x => x.Id == comment.PostId).FirstOrDefault().Comments.Add(comment);
-                    });
-
-                    hubConnection.On<string>("PrivateMessage", (messase) =>
-                    {
-
-                    });
-
-
-                    await hubConnection.StartAsync();
-                }
-                isConnectToSignalR = true;
-            }
-            catch (Exception ex)
-            {
-                isConnectToSignalR = false;
-                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-
-            }
-
-        }
+      
 
     }
 }

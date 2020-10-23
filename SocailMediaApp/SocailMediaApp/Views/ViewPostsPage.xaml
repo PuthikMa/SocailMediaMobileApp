@@ -4,14 +4,14 @@
              x:Class="SocailMediaApp.Views.ViewPostsPage"
              xmlns:ImageCir="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:local="clr-namespace:SocailMediaApp" xmlns:local1="clr-namespace:SocailMediaApp.Converters"
-             Title="✌ World">
+             Title="✌- World">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Message"/>
+        <ToolbarItem Text="Message" IconImageSource="message.png"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <StackLayout BackgroundColor="White" Padding="5">
-            <Grid VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="White" Padding="5"  VerticalOptions="FillAndExpand">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -21,16 +21,22 @@
                                       Aspect="AspectFit"
                                       BorderThickness="2"
                                       BorderColor="#f6f6f6"
-                                      HeightRequest="100"
-                                      Source="{Binding ProfilePicture}" />
-                <local:RoundEditor Grid.Column="1" Placeholder="Enter your post" FontSize="10" Text="{Binding Content,Mode=TwoWay}" AutoSize="TextChanges" ></local:RoundEditor>
-                <Button Grid.Column="2" Text="Post" FontSize="10" Command="{Binding PostContent}" />
-            </Grid>            
+                                      
+                                      Source="{Binding ProfilePicture}" HorizontalOptions="Start" VerticalOptions="End"  />
+                <local:RoundEditor Grid.Column="1" Placeholder="Enter your post"  Text="{Binding Content,Mode=TwoWay}" AutoSize="TextChanges" VerticalOptions="FillAndExpand" />
+                <Button Grid.Column="2" 
+                        FontSize="10" 
+                        Command="{Binding PostContent}" 
+                        HorizontalOptions="Start" 
+                        VerticalOptions="End" 
+                        ImageSource="send.png" BackgroundColor="Blue" HeightRequest="50" />
+            </Grid>
         </StackLayout>
         <RefreshView IsRefreshing="{Binding IsRefreshing}" 
                  Command="{Binding RefreshCommand}">
             <ScrollView HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand" Padding="0, 10,0,10">
+                
                 <StackLayout BindableLayout.ItemsSource="{Binding Posts}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>

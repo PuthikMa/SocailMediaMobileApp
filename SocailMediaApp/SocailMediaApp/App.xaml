@@ -10,10 +10,10 @@
             <Color x:Key="WhiteColor">White</Color>
             <Color x:Key="BlueColor">Blue</Color>
             <Color x:Key="ThemesWhite">#d9ecf2</Color>
-            <Style TargetType="Button">
+            <!--<Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource BlueColor}"/>
                 <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
-            </Style>
+            </Style>-->
             <Style TargetType="ScrollView">
                 <Setter Property="BackgroundColor" Value="Gray"/>
             </Style>
